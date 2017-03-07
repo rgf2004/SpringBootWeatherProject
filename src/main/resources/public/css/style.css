@@ -1,0 +1,40 @@
+body 
+{
+	font-family: 'Tangerine', serif;
+	font-size: 48px;
+}
+
+label
+{
+	font-size: 16px;
+}
+
+.alert-font
+{
+    font-size: 16px;
+}
+
+.table
+{
+	font-size: 20px;
+}
+
+
+.row{
+    margin-top:40px;
+    padding: 0 10px;
+}
+
+.clickable{
+    cursor: pointer;   
+}
+
+.panel-heading  span {
+	margin-top: -20px;
+	font-size: 15px;
+}
+
+.well
+{
+	font-size: 20px;
+}
