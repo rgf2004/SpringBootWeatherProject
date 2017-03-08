@@ -5,6 +5,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
+
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ public class HttpClient {
 	private ResponseHandler<String> responseHandler = new ResponseHandlerImpl();
 
 	public String GetRequestJson(HttpGetRequest request) throws Exception {
+
 		String response = "";
 
 		logger.debug("Invoking WS with URL {}", request.getURL());
@@ -29,7 +31,10 @@ public class HttpClient {
 		CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(new SSLConnectionSocketFactory(
 				SSLContexts.custom().loadTrustMaterial(null, new TrustSelfSignedStrategy()).build())).build();
 		response = httpclient.execute(httpget, responseHandler);
+		
+		logger.info("Weather Server Response is : " + response);
 
 		return response;
+
 	}
 }

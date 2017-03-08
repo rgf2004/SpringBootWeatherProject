@@ -3,6 +3,8 @@ package com.weather.business;
 import java.text.DecimalFormat;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import com.weather.data.dao.NoteDao;
 
 @Service
 public class WeatherDetails {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private final static String webHost = "http://api.openweathermap.org/";
 	private final static String resource = "data/2.5/weather";
@@ -28,11 +32,11 @@ public class WeatherDetails {
 		try {
 
 			JSONObject weatherDetails = getCurruentTemp();
-			
-			String weatherNote = noteDao.getTodayNote(weatherDetails.getDouble("temp")); 
-			
+
+			String weatherNote = noteDao.getTodayNote(weatherDetails.getDouble("temp"));
+
 			weatherDetails.put(Constants.NOTE, weatherNote);
-			
+
 			return weatherDetails;
 
 		} catch (Exception ex) {
@@ -64,10 +68,9 @@ public class WeatherDetails {
 
 	private double convertKelvinToCelsius(double temp) {
 
-		DecimalFormat df = new DecimalFormat("#.##");      
+		DecimalFormat df = new DecimalFormat("#.##");
 		temp = Double.valueOf(df.format(temp - 274.15));
 		return temp;
-		
 
 	}
 
@@ -84,6 +87,7 @@ public class WeatherDetails {
 			return jsonRespone;
 
 		} catch (Exception ex) {
+			logger.error("Error Occured while contacting weather server", ex);
 			throw new WeatherException(-60, "Error Occured While Contacting Weather Server, Please check the log file",
 					ex);
 		}
