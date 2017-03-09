@@ -183,7 +183,7 @@
 			 crossDomain: true,
 			 dataType: "json",
 			 success: function (data, status, jqXHR) {
-				console.log(data);
+				
 				if(data.status == 0)
 				{
 										
@@ -201,7 +201,7 @@
 					  $('#inputNoteBody').val('');
 					  fillNotesTable();
 					  
-					}, 2000)
+					}, 1000)
 				}
 				else
 				{			
@@ -211,14 +211,19 @@
 					  $(".flash").fadeTo(500, 0).slideUp(500, function(){
 						  $(this).remove();
 					  });
-					}, 2000)
+					}, 1500)
 				}
 				
 			 },
 			 error: function (jqXHR, status) {
 				 // error handler
-				 console.log('fail' + jqXHR);
-				 alert('fail' + status.code);
+				  $('#alert_placeholder').html('<div class="alert alert-danger alert-font flash"><span class="glyphicon glyphicon-remove"> Error! '+status.code+' Please Contact Server Admin.</span></div>')					
+	
+				window.setTimeout(function() {
+				  $(".flash").fadeTo(500, 0).slideUp(500, function(){
+					  $(this).remove();
+				  });
+				}, 1500)
 			 }
 			});		
 		}
@@ -237,7 +242,7 @@
 					  $(".flash").fadeTo(500, 0).slideUp(500, function(){
 						  $(this).remove();
 					  });
-					}, 2000)
+					}, 1500)
 				return ;
 			}
 			
@@ -252,7 +257,7 @@
 			 crossDomain: true,
 			 dataType: "json",
 			 success: function (data, status, jqXHR) {
-				console.log(data);
+				
 				if(data.status == 0)
 				{
 										
@@ -280,14 +285,19 @@
 					  $(".flash").fadeTo(500, 0).slideUp(500, function(){
 						  $(this).remove();
 					  });
-					}, 2000)
+					}, 1500)
 				}
 				
 			 },
 			 error: function (jqXHR, status) {
 				 // error handler
-				 console.log('fail' + jqXHR);
-				 alert('fail' + status.code);
+				 $('#alert_placeholder').html('<div class="alert alert-danger alert-font flash"><span class="glyphicon glyphicon-remove"> Error! '+status.code+' Please Contact Server Admin.</span></div>')					
+	
+				window.setTimeout(function() {
+				  $(".flash").fadeTo(500, 0).slideUp(500, function(){
+					  $(this).remove();
+				  });
+				}, 1500)
 			 }
 			});
 		}
@@ -304,13 +314,13 @@
 			 crossDomain: true,
 			 dataType: "json",
 			 success: function (data, status, jqXHR) {
-				console.log(data);
+				
 				if(data.status == 0)
 				{							
 					for (var i = 0 ; i < data.notes.length ; i++)
 					{
 						var row = '<tr><td  class="text-left">'+data.notes[i].noteBody+'</td><td  class="text-center">'+data.notes[i].noteDate+'</td></tr>';
-						console.log(row);
+						
 						$('.notes-table > tbody:last-child').append(row);
 					}
 				}
@@ -326,8 +336,13 @@
 			 },
 			 error: function (jqXHR, status) {
 				 // error handler
-				 console.log('fail' + jqXHR);
-				 alert('fail' + status.code);
+				  $('#alert_placeholder').html('<div class="alert alert-danger alert-font flash"><span class="glyphicon glyphicon-remove"> Error! '+status.code+' Please Contact Server Admin.</span></div>')					
+	
+				window.setTimeout(function() {
+				  $(".flash").fadeTo(500, 0).slideUp(500, function(){
+					  $(this).remove();
+				  });
+				}, 1500)
 			 }
 			});
 		}
@@ -344,7 +359,7 @@
 			 crossDomain: true,
 			 dataType: "json",
 			 success: function (data, status, jqXHR) {
-				console.log(data);
+				
 				if(data.status == 0)
 				{							
 					
@@ -359,7 +374,7 @@
 						
 						row += '</td><td  class="text-center">'+data.notes[i].noteDate+'</td></tr>';
 						
-						console.log(row);
+						
 						$('.predefined-notes-table > tbody:last-child').append(row);
 					}
 					
@@ -376,8 +391,13 @@
 			 },
 			 error: function (jqXHR, status) {
 				 // error handler
-				 console.log('fail' + jqXHR);
-				 alert('fail' + status.code);
+				 $('#alert_placeholder').html('<div class="alert alert-danger alert-font flash"><span class="glyphicon glyphicon-remove"> Error! '+status.code+' Please Contact Server Admin.</span></div>')					
+					
+				window.setTimeout(function() {
+				  $(".flash").fadeTo(500, 0).slideUp(500, function(){
+					  $(this).remove();
+				  });
+				}, 1500)
 			 }
 			});
 		}
@@ -391,7 +411,7 @@
 			 crossDomain: true,
 			 dataType: "json",
 			 success: function (data, status, jqXHR) {
-				console.log(data);
+				
 				if(data.status == 0)
 				{		
 					
@@ -404,7 +424,7 @@
 					  
 					  window.location.href = 'admin-login.html';
 					  
-					}, 2000)
+					}, 1500)
 					
 				}
 				else
@@ -415,14 +435,20 @@
 					  $(".flash").fadeTo(500, 0).slideUp(500, function(){
 						  $(this).remove();
 					  });
-					}, 2000)
+					}, 1500)
 				}
 				
 			 },
 			 error: function (jqXHR, status) {
 				 // error handler
-				 console.log('fail' + jqXHR);
-				 alert('fail' + status.code);
+				
+				 $('#alert_placeholder').html('<div class="alert alert-danger alert-font flash"><span class="glyphicon glyphicon-remove"> Error! '+status.code+' Please Contact Server Admin.</span></div>')					
+	
+				window.setTimeout(function() {
+				  $(".flash").fadeTo(500, 0).slideUp(500, function(){
+					  $(this).remove();
+				  });
+				}, 1500)
 			 }
 			});
 		}

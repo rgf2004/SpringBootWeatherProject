@@ -49,6 +49,8 @@ public class UserDao {
 
 			user.setPassword(DigestUtils.md2Hex(user.getPassword()));
 			this.em.persist(user);
+			
+			logger.info("Create User Method has been finished successfully");
 
 		} catch (WeatherException wex) {
 
@@ -96,7 +98,9 @@ public class UserDao {
 
 				updateUserToken(user, token);
 
-				return token;
+				logger.info("login User Method has been finished successfully");
+				
+				return token;							
 
 			} catch (Exception ex) {
 
@@ -105,7 +109,9 @@ public class UserDao {
 
 			}
 		} else {
-
+			
+			logger.info("Invalid Creditionals");
+			
 			throw new WeatherException(-20, "Email or Passowrd is not correct");
 
 		}
@@ -123,6 +129,8 @@ public class UserDao {
 			try {
 
 				updateUserToken(user, "");
+				
+				logger.info("login user Method has been finished successfully");
 
 			} catch (Exception ex) {
 
@@ -131,7 +139,9 @@ public class UserDao {
 
 			}
 		} else {
-
+			
+			logger.info("Passed Token is invalid");
+			
 			throw new WeatherException(-20, "Passed Token is not valid");
 
 		}

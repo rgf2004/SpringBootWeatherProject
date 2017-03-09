@@ -10,8 +10,6 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/hover-min.css" rel="stylesheet" media="all">
-    <link href="css/weather-icons.min.css" rel="stylesheet" media="all">
-    <link href="css/weather-icons-wind.min.css" rel="stylesheet" media="all">
 	<link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
@@ -38,39 +36,34 @@
 		<div class="col-lg-6">		
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h2 class="form-signin-heading">LocalWeather.<small>com</small></h2>
+					<h2 class="form-signin-heading">Please sign in</h2>
 				</div>
 				<div class="panel-body">
-					<h2>Weather in <strong>Cairo, EG</strong></h2>
-					
-					<div class="well">...</div>
-					
-					<table class="table table-striped table-bordered table-condensed">
-						<tr>
-							<td><strong>Tempreture</strong></td>
-							<td> <span class="tempreture-value">?</span> <i class="wi  wi-celsius"></i></td>
-						</tr>
-						<tr>
-							<td><strong>Humidity</strong></td>
-							<td> <span class="humidity-value">?</span> <i class="wi  wi-humidity"></i></td>
-						</tr>						
-						<tr>
-							<td><strong>Pressure</strong></td>
-							<td> <span class="pressure-value">?</span> <i class="wi  wi-barometer"></i></td>
-						</tr>
-						<tr>
-							<td><strong>Max Temp.</strong></td>
-							<td> <span class="max-temp-value">?</span> <i class="wi  wi-thermometer"></i></td>
-						</tr>						
-						<tr>
-							<td><strong>Min Temp.</strong></td>
-							<td> <span class="min-temp-value">?</span> <i class="wi  wi-thermometer-exterior"></i></td>
-						</tr>						
-					</table>					
-					
+					<form id="form-signin" class="form-signin">
+											
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+								<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address"  required autofocus>
+							</div>
+						</div>												
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+								<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>        
+							</div>
+						</div>
+						
+						<div class="form-group">							
+							<input type="submit" class="btn btn-lg btn-primary btn-block hvr-shrink" value="Sign in"></input>
+						</div>	
+												
+					</form>
 				</div>
 				<div class="panel-footer">	
-					<h4><a href="#" onclick="logout();" class="hvr-underline-from-center"> Logout </a></h4>
+					<h4>Don't have an account! <a href="#" onclick="window.location.href = 'register.html';" class="hvr-underline-from-center"> Sign Up Here </a></h4>
+					<h4>Admin! <a href="#" onclick="window.location.href = 'admin-login.html';" class="hvr-underline-from-center"> Sign in Here </a></h4>
 				</div>
 			</div>						
 		</div>
@@ -83,69 +76,48 @@
 	
 	<script>
 		
-		$(document).ready(function() {
-		
-		$.ajax({
-			 type: "GET",
-			 url: "rest/user/get-weather-details",
-			 contentType: "application/json; charset=utf-8",
-			 crossDomain: true,
-			 dataType: "json",
-			 success: function (data, status, jqXHR) {
-				console.log(data);
-				if(data.status == 0)
-				{							
-					$('.tempreture-value').text(data.weather.temp);
-					$('.humidity-value').text(data.weather.humidity);
-					$('.pressure-value').text(data.weather.pressure);
-					$('.max-temp-value').text(data.weather.temp_max);
-					$('.min-temp-value').text(data.weather.temp_min);
-					$('.well').text(data.weather.note);
+		var form = document.getElementById("form-signin");
+	
+		form.onsubmit = function (e) {
+			// stop the regular form submission
+			e.preventDefault();
+
+			// collect the form data while iterating over the inputs
+			
+			var data = {};
+			for (var i = 0, ii = form.length; i < ii; ++i) {
+				var input = form[i];
+				if (input.name) {
+				data[input.name] = input.value;
 				}
-				else if (data.status == -30)
-				{			
-					window.location.href = 'login.html';										
-				}
-				else
-				{
-					$('#alert_placeholder').html('<div class="alert alert-danger alert-font flash"><span class="glyphicon glyphicon-remove"> Error! '+data.message+'.</span></div>')					
-				}
-				
-			 },
-			 error: function (jqXHR, status) {
-				 // error handler
-				 console.log('fail' + jqXHR);
-				 alert('fail' + status.code);
-			 }
-			});
+			}
+			
+			submitData(data);
+		}
 		
-		});
+		function submitData(data) {
 		
-		
-		function logout()
-		{
 			$.ajax({
 			 type: "GET",
-			 url: "rest/user/logout",
+			 url: "rest/user/login?email="+data.email+"&password="+data.password,
 			 contentType: "application/json; charset=utf-8",
 			 crossDomain: true,
 			 dataType: "json",
 			 success: function (data, status, jqXHR) {
-				console.log(data);
+
 				if(data.status == 0)
 				{		
 					
-					$('#alert_placeholder').html('<div class="alert alert-success alert-font flash"> <span class="glyphicon glyphicon-ok"></span> Success! You will be redirected to login screen.</div>')					
+					$('#alert_placeholder').html('<div class="alert alert-success alert-font flash"> <span class="glyphicon glyphicon-ok"></span> Success! You will be redirected to home screen in 2 seconds.</div>')					
 					
 					window.setTimeout(function() {
 					  $(".flash").fadeTo(500, 0).slideUp(500, function(){
 						  $(this).remove();
 					  });
 					  
-					  window.location.href = 'login.html';
+					  window.location.href = 'home.html';
 					  
 					}, 2000)
-					
 				}
 				else
 				{			
@@ -155,18 +127,25 @@
 					  $(".flash").fadeTo(500, 0).slideUp(500, function(){
 						  $(this).remove();
 					  });
-					}, 2000)
+					}, 1500)
 				}
 				
 			 },
 			 error: function (jqXHR, status) {
 				 // error handler
-				 console.log('fail' + jqXHR);
-				 alert('fail' + status.code);
+
+				 $('#alert_placeholder').html('<div class="alert alert-danger alert-font flash"><span class="glyphicon glyphicon-remove"> Error! '+status.code+' Please Contact Server Admin.</span></div>')					
+					
+					window.setTimeout(function() {
+					  $(".flash").fadeTo(500, 0).slideUp(500, function(){
+						  $(this).remove();
+					  });
+					}, 1500)
 			 }
 			});
+					
 		}
-						
+		
 	</script>
   </body>
 </html>

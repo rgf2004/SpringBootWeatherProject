@@ -38,6 +38,9 @@ public class NoteValidator implements Validator {
 		} else
 			throw new WeatherException(-50, "Passed object is not of type Note");
 
+		
+		logger.info("Validating Note Method has finished succesfully - note is Valid");
+		
 	}
 
 }

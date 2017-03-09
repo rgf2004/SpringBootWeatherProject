@@ -99,7 +99,7 @@ public class Admin
       }
       catch (WeatherException ex)
       {
-         logger.error("Exception Occured while user trying to login  with error message [{}]", ex.getMessage());
+         logger.error("Exception Occured while user trying to logout  with error message [{}]", ex.getMessage());
          return Response.status(200).entity(jsonHandler.createJsonResponseFromException(ex)).build();
       }
    }
@@ -119,14 +119,14 @@ public class Admin
       {
 
          noteDao.createNote(note);
-         logger.info("User Creation done successfully");
+         logger.info("Create Note done successfully");
          return Response.status(200).entity(jsonHandler.createSuccessJsonResponse()).build();
 
       }
       catch (WeatherException ex)
       {
 
-         logger.error("Exception Occured while creating new user with error message [{}]", ex.getMessage());
+         logger.error("Exception Occured while creating new note with error message [{}]", ex.getMessage());
          return Response.status(200).entity(jsonHandler.createJsonResponseFromException(ex)).build();
 
       }
@@ -140,21 +140,21 @@ public class Admin
    public Response createPredefinedNote(@QueryParam(Constants.NOTE_RANGE_ID) int rangeID, PredefinedNote note)
    {
 
-      logger.info("Create User Method has been called");
-      logger.debug("Parameters : Note [{}]", note.toString());
+      logger.info("Create Note Method has been called");
+      logger.debug("Parameters : Note [{}]", note);
 
       try
       {
 
          noteDao.createPredefinedNote(rangeID, note);
-         logger.info("User Creation done successfully");
+         logger.info("Create Note done successfully");
          return Response.status(200).entity(jsonHandler.createSuccessJsonResponse()).build();
 
       }
       catch (WeatherException ex)
       {
 
-         logger.error("Exception Occured while creating new user with error message [{}]", ex.getMessage());
+         logger.error("Exception Occured while creating new predefined with error message [{}]", ex.getMessage());
          return Response.status(200).entity(jsonHandler.createJsonResponseFromException(ex)).build();
 
       }
@@ -173,13 +173,15 @@ public class Admin
       {
 
          List<Note> notes = noteDao.getAllNotes();
+         
+         logger.info("Retrieved Nots {}", notes);
 
          return Response.status(200).entity(jsonHandler.createSuccessJsonResponseWithBody("notes", notes)).build();
 
       }
       catch (WeatherException ex)
       {
-         logger.error("Exception Occured while user trying to login  with error message [{}]", ex.getMessage());
+         logger.error("Exception Occured while user trying to get all notes with error message [{}]", ex.getMessage());
          return Response.status(200).entity(jsonHandler.createJsonResponseFromException(ex)).build();
       }
    }
@@ -191,20 +193,22 @@ public class Admin
    public Response getAllPredefinedNotes()
    {
 
-      logger.info("get All Notes Method has been called");
+      logger.info("get All Predefined Notes Method has been called");
 
       try
       {
 
          List<PredefinedNote> notes = noteDao.getAllPredefinedNotes();
 
+         logger.info("Retrieved Nots {}", notes);
+         
          return Response.status(200)
             .entity(jsonHandler.createSuccessJsonResponseWithBody(Constants.NOTES_ELEMENT, notes)).build();
 
       }
       catch (WeatherException ex)
       {
-         logger.error("Exception Occured while user trying to login  with error message [{}]", ex.getMessage());
+         logger.error("Exception Occured while user trying to get all predefined nots with error message [{}]", ex.getMessage());
          return Response.status(200).entity(jsonHandler.createJsonResponseFromException(ex)).build();
       }
    }

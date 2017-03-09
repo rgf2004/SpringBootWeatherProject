@@ -54,6 +54,8 @@ public class UserValidator implements Validator{
 			throw new WeatherException(-10, "Mobile No should be Numbers only and 11 digits");
 		}
 		
+		logger.info("Validating User Method has finished succesfully - user is Valid");
+		
 	}
 		
 	private boolean checkEmail(String email) {

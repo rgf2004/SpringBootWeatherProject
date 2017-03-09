@@ -49,7 +49,7 @@ public class User {
 	public Response create(com.weather.data.model.User user) {
 
 		logger.info("Create User Method has been called");
-		logger.debug("Parameters : User [{}]", user.toString());
+		logger.debug("Parameters : User [{}]", user);
 
 		try {
 			userDao.createUser(user);
@@ -102,7 +102,7 @@ public class User {
 			return Response.status(200).entity(jsonHandler.createSuccessJsonResponse()).build();
 
 		} catch (WeatherException ex) {
-			logger.error("Exception Occured while user trying to login  with error message [{}]", ex.getMessage());
+			logger.error("Exception Occured while user trying to logout with error message [{}]", ex.getMessage());
 			return Response.status(200).entity(jsonHandler.createJsonResponseFromException(ex)).build();
 		}
 	}
@@ -119,12 +119,12 @@ public class User {
 			
 			JSONObject weatherDetailsObj = weatherDetails.getWeatherDetails();
 			
-			logger.info("User logged out successfully");
+			logger.info("Weather Details : {}", weatherDetailsObj);
 
 			return Response.status(200).entity(jsonHandler.createSuccessJsonResponseWithBody(Constants.WEATHER_ELEMENT, weatherDetailsObj)).build();
 
 		} catch (WeatherException ex) {
-			logger.error("Exception Occured while user trying to login  with error message [{}]", ex.getMessage());
+			logger.error("Exception Occured while user trying to get weather details with error message [{}]", ex.getMessage());
 			return Response.status(200).entity(jsonHandler.createJsonResponseFromException(ex)).build();
 		}
 	}

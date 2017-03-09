@@ -80,7 +80,7 @@
 					</form>
 				</div>			
 				<div class="panel-footer">	
-					<h4>have an account! <a href="#" onclick="window.location.href = 'login.html';" class="hvr-underline-from-center"> Sign In Here </a></h4>
+					<h4>have an account! <a href="#" onclick="window.location.href = 'index.html';" class="hvr-underline-from-center"> Sign In Here </a></h4>
 				</div>
 			</div>						
 		</div>
@@ -101,7 +101,7 @@
 			e.preventDefault();
 
 			// collect the form data while iterating over the inputs
-			console.log(form.length);
+			
 			var data = {};
 			for (var i = 0, ii = form.length; i < ii; ++i) {
 				var input = form[i];
@@ -109,7 +109,7 @@
 				data[input.name] = input.value;
 				}
 			}
-			console.log(data);
+			
 			submitData(data);
 		}
 	
@@ -123,20 +123,20 @@
 			 crossDomain: true,
 			 dataType: "json",
 			 success: function (data, status, jqXHR) {
-				console.log(data);
+				
 				if(data.status == 0)
 				{
 					
 					resetForm();
 					
-					$('#alert_placeholder').html('<div class="alert alert-success alert-font flash"> <span class="glyphicon glyphicon-ok"></span> Success! You will be redirected to login screen in 3 seconds.</div>')					
+					$('#alert_placeholder').html('<div class="alert alert-success alert-font flash"> <span class="glyphicon glyphicon-ok"></span> Success! You will be redirected to login screen in 2 seconds.</div>')					
 					
 					window.setTimeout(function() {
 					  $(".flash").fadeTo(500, 0).slideUp(500, function(){
 						  $(this).remove();
 					  });
 					  
-					  window.location.href = 'login.html';
+					  window.location.href = 'index.html';
 					  
 					}, 2000)
 				}
@@ -148,14 +148,19 @@
 					  $(".flash").fadeTo(500, 0).slideUp(500, function(){
 						  $(this).remove();
 					  });
-					}, 2000)
+					}, 1500)
 				}
 				
 			 },
 			 error: function (jqXHR, status) {
 				 // error handler
-				 console.log('fail' + jqXHR);
-				 alert('fail' + status.code);
+				 $('#alert_placeholder').html('<div class="alert alert-danger alert-font flash"><span class="glyphicon glyphicon-remove"> Error! '+status.code+' Please Contact Server Admin.</span></div>')					
+					
+				window.setTimeout(function() {
+				  $(".flash").fadeTo(500, 0).slideUp(500, function(){
+					  $(this).remove();
+				  });
+				}, 1500)
 			 }
 			});
 					

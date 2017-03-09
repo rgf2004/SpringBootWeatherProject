@@ -41,6 +41,8 @@ public class NoteDao {
 			noteValidator.validate(note);
 
 			this.em.persist(note);
+			
+			logger.info("Create Note Method has been finished successfully");
 
 		} catch (WeatherException wex) {
 
@@ -69,6 +71,8 @@ public class NoteDao {
 			noteValidator.validate(note);
 
 			this.em.persist(note);
+			
+			logger.info("Create Predefined Note Method has been finished successfully");
 
 		} catch (WeatherException wex) {
 

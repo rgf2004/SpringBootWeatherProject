@@ -40,6 +40,7 @@ public class WeatherDetails {
 			return weatherDetails;
 
 		} catch (Exception ex) {
+			logger.error("Error Occured While Contacting Weather Server", ex);
 			throw new WeatherException(-60, "Error Occured While Contacting Weather Server, Please check the log file",
 					ex);
 		}
