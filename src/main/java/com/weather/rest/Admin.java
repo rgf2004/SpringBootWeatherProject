@@ -49,6 +49,12 @@ public class Admin
    @Autowired
    private JsonHandler jsonHandler;
 
+	/***
+	 * Login User Method is the entry point for admin login.
+	 * @param email
+	 * @param password
+	 * @return JSON object represents the success/failure of the transaction in addition to token cookie
+	 */
    @GET
    @Path("/login")
    @Produces(MediaType.APPLICATION_JSON)
@@ -77,6 +83,12 @@ public class Admin
       }
    }
 
+   /***
+   * Logout User Method is the entry point for customer logout.
+   *  
+   * @param token cookie
+   * @return JSON object represents the success/failure of the transaction
+   */
    @GET
    @AuthenticateAsAdmin
    @Path("/logout")
@@ -104,6 +116,11 @@ public class Admin
       }
    }
 
+   /***
+    * create new note.
+    * @param note object
+    * @return JSON object represents the success/failure of the transaction
+    */
    @POST
    @AuthenticateAsAdmin
    @Path("/create-note")
@@ -132,6 +149,11 @@ public class Admin
       }
    }
 
+   /***
+    * create new predefined note.
+    * @param predefined note object
+    * @return JSON object represents the success/failure of the transaction
+    */   
    @POST
    @AuthenticateAsAdmin
    @Path("/create-predefined-note")
@@ -160,6 +182,10 @@ public class Admin
       }
    }
 
+   /***
+    * get all notes
+    * @return JSON object represents the success/failure of the transaction in addition to notes 
+    */
    @GET
    @AuthenticateAsAdmin
    @Path("/get-all-notes")
@@ -185,7 +211,12 @@ public class Admin
          return Response.status(200).entity(jsonHandler.createJsonResponseFromException(ex)).build();
       }
    }
+   
 
+   /***
+    * get all predefined notes
+    * @return JSON object represents the success/failure of the transaction in addition to predefined notes 
+    */
    @GET
    @AuthenticateAsAdmin
    @Path("/get-all-predefined-notes")

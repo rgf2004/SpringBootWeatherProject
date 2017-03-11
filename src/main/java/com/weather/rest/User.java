@@ -42,6 +42,11 @@ public class User {
 	@Autowired
 	JsonHandler jsonHandler;
 
+	/***
+	 * Create User Method is the entry point for creating new customer.
+	 * @param user object 
+	 * @return JSON object represents the success/failure of the transaction
+	 */
 	@POST
 	@Path("/create")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -61,6 +66,12 @@ public class User {
 		}
 	}
 
+	/***
+	 * Login User Method is the entry point for customer login.
+	 * @param email
+	 * @param password
+	 * @return JSON object represents the success/failure of the transaction in addition to token cookie
+	 */
 	@GET
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -84,6 +95,11 @@ public class User {
 		}
 	}
 
+	/***
+	 * Logout User Method is the entry point for customer logout.
+	 * @param token cookie
+	 * @return JSON object represents the success/failure of the transaction
+	 */
 	@GET
 	@AuthenticateAsCustomer
 	@Path("/logout")
@@ -107,6 +123,11 @@ public class User {
 		}
 	}
 	
+	
+	/***
+	 * GetWeatherDetails method to get the weather details.
+	 * @return JSON object represents the success/failure of the transaction in addition to weather details
+	 */
 	@GET
 	@AuthenticateAsCustomer
 	@Path("/get-weather-details")
