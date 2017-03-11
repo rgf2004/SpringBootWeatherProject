@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'','admin@hotmail.com','12345678901','Admin Admin','db5d888a0480461f4fb978746d1baf34','');
+INSERT INTO `user` VALUES (1,'','admin@localweather.com','12345678901','Admin Admin','db5d888a0480461f4fb978746d1baf34','');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
