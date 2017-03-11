@@ -17,8 +17,12 @@ public class TestHttpClient {
 
 	@Test
 	public void testHttpClient() throws Exception {
+		
+		//String URL = "http://rest-service.guides.spring.io/greeting";
+		String URL = "https://jsonplaceholder.typicode.com/posts/1";
+		
 		HttpGetRequest getRequest = new HttpGetRequest();
-		getRequest.setURL("http://rest-service.guides.spring.io/greeting");
+		getRequest.setURL(URL);
 
 		HttpClient client = new HttpClient();
 
